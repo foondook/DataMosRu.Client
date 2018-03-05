@@ -1,10 +1,4 @@
-﻿// To parse this JSON data, add NuGet 'Newtonsoft.Json' then do:
-//
-//    using DataMosRu.Model;
-//
-//    var dataset = Dataset.FromJson(jsonString);
-
-namespace DataMosRu.Model
+﻿namespace DataMosRu.Model
 {
     using System;
     using System.Collections.Generic;
@@ -14,28 +8,31 @@ namespace DataMosRu.Model
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 
-    public partial class Dataset
+      public partial class Dataset
     {
         [JsonProperty("Id")]
         public long Id { get; set; }
 
-        [JsonProperty("VersionNumber")]
-        public long VersionNumber { get; set; }
-
-        [JsonProperty("ReleaseNumber")]
-        public long ReleaseNumber { get; set; }
-
-        [JsonProperty("Caption")]
-        public string Caption { get; set; }
+        [JsonProperty("IdentificationNumber")]
+        public string IdentificationNumber { get; set; }
 
         [JsonProperty("CategoryId")]
         public long CategoryId { get; set; }
 
+        [JsonProperty("CategoryCaption")]
+        public string CategoryCaption { get; set; }
+
         [JsonProperty("DepartmentId")]
         public long DepartmentId { get; set; }
 
-        [JsonProperty("PublishDate")]
-        public string PublishDate { get; set; }
+        [JsonProperty("DepartmentCaption")]
+        public string DepartmentCaption { get; set; }
+
+        [JsonProperty("Caption")]
+        public string Caption { get; set; }
+
+        [JsonProperty("Description")]
+        public string Description { get; set; }
 
         [JsonProperty("FullDescription")]
         public string FullDescription { get; set; }
@@ -46,37 +43,45 @@ namespace DataMosRu.Model
         [JsonProperty("ContainsGeodata")]
         public bool ContainsGeodata { get; set; }
 
-        [JsonProperty("ContainsAccEnvData")]
-        public bool ContainsAccEnvData { get; set; }
+        [JsonProperty("VersionNumber")]
+        public string VersionNumber { get; set; }
 
-        [JsonProperty("IsForeign")]
-        public bool IsForeign { get; set; }
+        [JsonProperty("VersionDate")]
+        public string VersionDate { get; set; }
 
-        [JsonProperty("IsSeasonal")]
-        public bool IsSeasonal { get; set; }
+        [JsonProperty("ItemsCount")]
+        public long ItemsCount { get; set; }
 
-        [JsonProperty("Season")]
-        public string Season { get; set; }
+        [JsonProperty("Columns")]
+        public List<Column> Columns { get; set; }
+    }
 
-        [JsonProperty("IsArchive")]
-        public bool IsArchive { get; set; }
+    public partial class Column
+    {
+        [JsonProperty("Name")]
+        public string Name { get; set; }
 
-        [JsonProperty("IsNew")]
-        public bool IsNew { get; set; }
+        [JsonProperty("Caption")]
+        public string Caption { get; set; }
 
-        [JsonProperty("LastUpdateDate")]
-        public string LastUpdateDate { get; set; }
+        [JsonProperty("Visible")]
+        public bool Visible { get; set; }
 
-        [JsonProperty("SefUrl")]
-        public string SefUrl { get; set; }
+        [JsonProperty("Type")]
+        public string Type { get; set; }
 
-        [JsonProperty("IdentificationNumber")]
-        public string IdentificationNumber { get; set; }
+        [JsonProperty("SubColumns")]
+        public List<Column> SubColumns { get; set; }
     }
 
     public partial class Dataset
     {
         public static Dataset FromJson(string json) => JsonConvert.DeserializeObject<Dataset>(json, DataMosRu.Model.Converter.Settings);
+        
+        public override string ToString() 
+        {
+            return Serialize.ToJson(this);
+        }
     }
 
     public static class Serialize
