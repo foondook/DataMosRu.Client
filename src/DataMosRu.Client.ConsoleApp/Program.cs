@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using DataMosRu.Client;
 using DataMosRu.Model;
 using Refit;
 
@@ -17,11 +18,11 @@ namespace DataMosRu.Client.ConsoleApp
             // var v = await client.GetVersion();
             // Console.WriteLine($"Current version: {v}");
 
-            // var datasets = await client.GetDatasets();
-            // foreach (var dataset in datasets)
-            // {
-            //    Console.WriteLine($"Dataset {dataset.Id} : {dataset.Caption}");
-            // }
+            var datasets = await client.GetDatasets(top: 3);
+            foreach (var dataset in datasets)
+            {
+               Console.WriteLine($"Dataset {dataset.Id} : {dataset.Caption}");
+            }
 
             // var classifiers = await client.GetClassifiers();
             // foreach (var classifier in classifiers)
@@ -30,7 +31,7 @@ namespace DataMosRu.Client.ConsoleApp
             // }
 
             var d = await client.GetDataset(658);
-            Console.WriteLine(d.ToJson());
+            //Console.WriteLine(d.ToJson());
 
             Console.Read();
         }

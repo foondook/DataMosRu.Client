@@ -4,6 +4,15 @@ Simple client for http://data.mos.ru public API based on [Refit](https://github.
 
 [![MyGet Build Status](https://www.myget.org/BuildSource/Badge/foondook?identifier=f0744b95-0367-4c75-a11e-8ee37ad3df1e)](https://www.myget.org/)
 
+## Installation
+Package Manager Console:
+```
+Install-Package DataMosRu.Model -Version 0.0.1-CI00008 -Source https://www.myget.org/F/foondook/api/v3/index.json
+```
+.Net CLI:
+```
+dotnet add package DataMosRu.Model --version 0.0.1-CI00008 --source https://www.myget.org/F/foondook/api/v3/index.json
+```
 ## Usage
 
 ```csharp
