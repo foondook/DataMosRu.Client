@@ -2,6 +2,8 @@
 
 Simple client for http://data.mos.ru public API based on [Refit](https://github.com/paulcbetts/refit) library.
 
+[![MyGet Build Status](https://www.myget.org/BuildSource/Badge/foondook?identifier=f0744b95-0367-4c75-a11e-8ee37ad3df1e)](https://www.myget.org/)
+
 ## Usage
 
 ```csharp
@@ -36,3 +38,4 @@ foreach (var dataset in datasets)
 - [ ] Get list of Categories
 - [ ] Get list of Departments
 - [ ] Get Dataset content Rows
+- [ ] Add projection to all methods (?)
