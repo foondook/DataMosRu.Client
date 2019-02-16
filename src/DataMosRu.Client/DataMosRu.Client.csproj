@@ -1,14 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 <PropertyGroup>
-  <TargetFramework>netstandard2.0</TargetFramework>
+  <TargetFramework>netstandard1.6</TargetFramework>
   <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
 </PropertyGroup>
-
-<ItemGroup>
-  <PackageReference Include="refit" Version="4.3.0" />
-</ItemGroup>
 
 <ItemGroup>
   <ProjectReference Include="..\DataMosRu.Model\DataMosRu.Model.csproj" />
