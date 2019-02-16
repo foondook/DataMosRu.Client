@@ -7,11 +7,11 @@ Simple client for http://data.mos.ru public API based on [Refit](https://github.
 ## Installation
 Package Manager Console:
 ```
-Install-Package DataMosRu.Model -Version 0.0.1-CI00008 -Source https://www.myget.org/F/foondook/api/v3/index.json
+Install-Package DataMosRu.Client -Version 0.0.1-CI00008 -Source https://www.myget.org/F/foondook/api/v3/index.json
 ```
 .Net CLI:
 ```
-dotnet add package DataMosRu.Model --version 0.0.1-CI00008 --source https://www.myget.org/F/foondook/api/v3/index.json
+dotnet add package DataMosRu.Client --version 0.0.1-CI00008 --source https://www.myget.org/F/foondook/api/v3/index.json
 ```
 ## Usage
 
