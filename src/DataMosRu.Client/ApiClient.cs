@@ -8,11 +8,9 @@ namespace DataMosRu.Client
 {
     public class ApiClient
     {
-        public ApiClient(string apiKey)
-        {
-            var http = new HttpClient(new ApiKeyHttpClientHandler(apiKey));
-
-            Datasets = new DatasetsClient(http);
+        public ApiClient(string apiKey, HttpClient http)
+        {            
+            Datasets = new DatasetsClient(apiKey, http);
             Categories = new CategoriesClient(http);
             Departments = new DepartmentsClient(http);
             Features = new FeaturesClient(http);
