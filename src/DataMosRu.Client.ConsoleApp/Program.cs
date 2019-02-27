@@ -13,13 +13,21 @@ namespace DataMosRu.Client.ConsoleApp
             var apiKey = "09de26506b0052eda4972a13ca34829b";
             var api = new ApiClient(apiKey, new HttpClient());
 
+            var item = await api.Datasets.GetItemAsync(493, System.Threading.CancellationToken.None,
+                d => new {
+                    d.Id,
+                    d.Caption,
+                    d.Columns
+                });
+
             var result = await api.Datasets.GetListAsync(
                     foreign: false,
                     filter: null,
                     orderby: null,
                     top: 5,
                     skip: 0,
-                    inlinecount: "allpages");
+                    inlinecount: "allpages",
+                    cancellationToken: System.Threading.CancellationToken.None);
 
             foreach (var dataset in result.Items)
             {

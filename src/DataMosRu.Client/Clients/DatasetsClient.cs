@@ -4,11 +4,15 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Linq;
+using DataMosRu.Client.Interfaces;
+using System.Linq.Expressions;
+using System.Threading;
+using System.Collections.Generic;
 
 namespace DataMosRu.Client.Clients
 {
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "12.0.14.0 (NJsonSchema v9.13.18.0 (Newtonsoft.Json v11.0.0.0))")]
-    public partial class DatasetsClient
+    public partial class DatasetsClient : IDatasetsClient
     {
         private string _baseUrl = "https://apidata.mos.ru";
         private string _apiKey;
@@ -571,7 +575,7 @@ namespace DataMosRu.Client.Clients
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         public async System.Threading.Tasks.Task<DatasetItem> GetItemAsync(int id, System.Threading.CancellationToken cancellationToken)
-        { 
+        {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/datasets/{id}");
             urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
@@ -1158,6 +1162,14 @@ namespace DataMosRu.Client.Clients
             }
 
             return System.Convert.ToString(value, cultureInfo);
+        }
+
+        public Task<DatasetItem> GetItemAsync(int id, CancellationToken cancellationToken, Expression<Func<DatasetItem, object>> projectionExpression)
+        {
+            var projection = (projectionExpression.Body as NewExpression).Members.Select(m => m.Name);
+
+            return GetItemPostAsync(id, projection, cancellationToken);
+                
         }
     }
 }
