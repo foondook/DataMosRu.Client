@@ -11,7 +11,9 @@ namespace DataMosRu.Client.ConsoleApp
         {
             // hardcoded just for testing purposes - random account registered
             var apiKey = "09de26506b0052eda4972a13ca34829b";
-            var api = new DataMosRu.Client.ApiClient();
+            var api = new DataMosRu.Client.ApiClient(apiKey);
+
+            var dataset = await api.Datasets.GetItemAsync(658);
 
             Console.Read();
         }
