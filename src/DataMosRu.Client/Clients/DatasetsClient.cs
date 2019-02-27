@@ -5,20 +5,21 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Linq;
 
-namespace DataMosRu.Client
+namespace DataMosRu.Client.Clients
 {
+    [System.CodeDom.Compiler.GeneratedCode("NSwag", "12.0.14.0 (NJsonSchema v9.13.18.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class DatasetsClient
     {
         private string _baseUrl = "https://apidata.mos.ru";
-        private HttpClient _httpClient;
-        private Lazy<JsonSerializerSettings> _settings;
+        private System.Net.Http.HttpClient _httpClient;
+        private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
 
-        public DatasetsClient(HttpClient httpClient)
+        public DatasetsClient(System.Net.Http.HttpClient httpClient)
         {
             _httpClient = httpClient;
-            _settings = new Lazy<JsonSerializerSettings>(() =>
+            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() =>
             {
-                var settings = new JsonSerializerSettings();
+                var settings = new Newtonsoft.Json.JsonSerializerSettings();
                 UpdateJsonSerializerSettings(settings);
                 return settings;
             });
@@ -30,12 +31,12 @@ namespace DataMosRu.Client
             set { _baseUrl = value; }
         }
 
-        protected JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
+        protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
 
-        partial void UpdateJsonSerializerSettings(JsonSerializerSettings settings);
-        partial void PrepareRequest(HttpClient client, HttpRequestMessage request, string url);
-        partial void PrepareRequest(HttpClient client, HttpRequestMessage request, StringBuilder urlBuilder);
-        partial void ProcessResponse(HttpClient client, HttpResponseMessage response);
+        partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
+        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
 
         /// <summary>Получение списка наборов данных или справочников</summary>
         /// <param name="foreign">Указание язычности наборов данных, true - возвращает англоязычные данные</param>
@@ -46,7 +47,7 @@ namespace DataMosRu.Client
         /// <param name="inlinecount">Принимает значение allpages для того, чтобы в ответе получить общее количество записей. По умолчанию общее количество записей не выводится.</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<IQueryable<ResultWithCount<DatasetListItem>>> GetListAsync(bool? foreign, string filter, string orderby, int? top, int? skip, string inlinecount)
+        public System.Threading.Tasks.Task<ResultWithCount<DatasetListItem>> GetListAsync(bool? foreign, string filter, string orderby, int? top, int? skip, string inlinecount)
         {
             return GetListAsync(foreign, filter, orderby, top, skip, inlinecount, System.Threading.CancellationToken.None);
         }
@@ -61,53 +62,53 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<IQueryable<ResultWithCount<DatasetListItem>>> GetListAsync(bool? foreign, string filter, string orderby, int? top, int? skip, string inlinecount, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ResultWithCount<DatasetListItem>> GetListAsync(bool? foreign, string filter, string orderby, int? top, int? skip, string inlinecount, System.Threading.CancellationToken cancellationToken)
         {
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/classifiers?");
             if (foreign != null)
             {
-                urlBuilder_.Append("foreign=").Append(Uri.EscapeDataString(ConvertToString(foreign, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("foreign=").Append(System.Uri.EscapeDataString(ConvertToString(foreign, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (filter != null)
             {
-                urlBuilder_.Append("$filter=").Append(Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$filter=").Append(System.Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (orderby != null)
             {
-                urlBuilder_.Append("$orderby=").Append(Uri.EscapeDataString(ConvertToString(orderby, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$orderby=").Append(System.Uri.EscapeDataString(ConvertToString(orderby, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (top != null)
             {
-                urlBuilder_.Append("$top=").Append(Uri.EscapeDataString(ConvertToString(top, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$top=").Append(System.Uri.EscapeDataString(ConvertToString(top, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (skip != null)
             {
-                urlBuilder_.Append("$skip=").Append(Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$skip=").Append(System.Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (inlinecount != null)
             {
-                urlBuilder_.Append("$inlinecount=").Append(Uri.EscapeDataString(ConvertToString(inlinecount, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$inlinecount=").Append(System.Uri.EscapeDataString(ConvertToString(inlinecount, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Method = new HttpMethod("GET");
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -120,13 +121,13 @@ namespace DataMosRu.Client
                         if (status_ == "200")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = default(IQueryable<ResultWithCount<DatasetListItem>>);
+                            var result_ = default(ResultWithCount<DatasetListItem>);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<IQueryable<ResultWithCount<DatasetListItem>>>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<ResultWithCount<DatasetListItem>>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -138,7 +139,7 @@ namespace DataMosRu.Client
                             throw new SwaggerException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
 
-                        return default(IQueryable<ResultWithCount<DatasetListItem>>);
+                        return default(ResultWithCount<DatasetListItem>);
                     }
                     finally
                     {
@@ -162,7 +163,7 @@ namespace DataMosRu.Client
         /// <param name="inlinecount">Принимает значение allpages для того, чтобы в ответе получить общее количество записей. По умолчанию общее количество записей не выводится.</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<IQueryable<ResultWithCount<DatasetListItem>>> GetListPostAsync(System.Collections.Generic.IEnumerable<string> projection, bool? foreign, string filter, string orderby, int? top, int? skip, string inlinecount)
+        public System.Threading.Tasks.Task<ResultWithCount<DatasetListItem>> GetListPostAsync(System.Collections.Generic.IEnumerable<string> projection, bool? foreign, string filter, string orderby, int? top, int? skip, string inlinecount)
         {
             return GetListPostAsync(projection, foreign, filter, orderby, top, skip, inlinecount, System.Threading.CancellationToken.None);
         }
@@ -178,56 +179,56 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<IQueryable<ResultWithCount<DatasetListItem>>> GetListPostAsync(System.Collections.Generic.IEnumerable<string> projection, bool? foreign, string filter, string orderby, int? top, int? skip, string inlinecount, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ResultWithCount<DatasetListItem>> GetListPostAsync(System.Collections.Generic.IEnumerable<string> projection, bool? foreign, string filter, string orderby, int? top, int? skip, string inlinecount, System.Threading.CancellationToken cancellationToken)
         {
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/classifiers?");
             if (foreign != null)
             {
-                urlBuilder_.Append("foreign=").Append(Uri.EscapeDataString(ConvertToString(foreign, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("foreign=").Append(System.Uri.EscapeDataString(ConvertToString(foreign, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (filter != null)
             {
-                urlBuilder_.Append("$filter=").Append(Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$filter=").Append(System.Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (orderby != null)
             {
-                urlBuilder_.Append("$orderby=").Append(Uri.EscapeDataString(ConvertToString(orderby, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$orderby=").Append(System.Uri.EscapeDataString(ConvertToString(orderby, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (top != null)
             {
-                urlBuilder_.Append("$top=").Append(Uri.EscapeDataString(ConvertToString(top, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$top=").Append(System.Uri.EscapeDataString(ConvertToString(top, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (skip != null)
             {
-                urlBuilder_.Append("$skip=").Append(Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$skip=").Append(System.Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (inlinecount != null)
             {
-                urlBuilder_.Append("$inlinecount=").Append(Uri.EscapeDataString(ConvertToString(inlinecount, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$inlinecount=").Append(System.Uri.EscapeDataString(ConvertToString(inlinecount, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new StringContent(JsonConvert.SerializeObject(projection, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(projection, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
-                    request_.Method = new HttpMethod("POST");
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -240,13 +241,13 @@ namespace DataMosRu.Client
                         if (status_ == "200")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = default(IQueryable<ResultWithCount<DatasetListItem>>);
+                            var result_ = default(ResultWithCount<DatasetListItem>);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<IQueryable<ResultWithCount<DatasetListItem>>>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<ResultWithCount<DatasetListItem>>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -258,7 +259,7 @@ namespace DataMosRu.Client
                             throw new SwaggerException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
 
-                        return default(IQueryable<ResultWithCount<DatasetListItem>>);
+                        return default(ResultWithCount<DatasetListItem>);
                     }
                     finally
                     {
@@ -281,7 +282,7 @@ namespace DataMosRu.Client
         /// <param name="inlinecount">Принимает значение allpages для того, чтобы в ответе получить общее количество записей. По умолчанию общее количество записей не выводится.</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<IQueryable<ResultWithCount<DatasetListItem>>> GetList2Async(bool? foreign, string filter, string orderby, int? top, int? skip, string inlinecount)
+        public System.Threading.Tasks.Task<ResultWithCount<DatasetListItem>> GetList2Async(bool? foreign, string filter, string orderby, int? top, int? skip, string inlinecount)
         {
             return GetList2Async(foreign, filter, orderby, top, skip, inlinecount, System.Threading.CancellationToken.None);
         }
@@ -296,53 +297,53 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<IQueryable<ResultWithCount<DatasetListItem>>> GetList2Async(bool? foreign, string filter, string orderby, int? top, int? skip, string inlinecount, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ResultWithCount<DatasetListItem>> GetList2Async(bool? foreign, string filter, string orderby, int? top, int? skip, string inlinecount, System.Threading.CancellationToken cancellationToken)
         {
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/datasets?");
             if (foreign != null)
             {
-                urlBuilder_.Append("foreign=").Append(Uri.EscapeDataString(ConvertToString(foreign, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("foreign=").Append(System.Uri.EscapeDataString(ConvertToString(foreign, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (filter != null)
             {
-                urlBuilder_.Append("$filter=").Append(Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$filter=").Append(System.Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (orderby != null)
             {
-                urlBuilder_.Append("$orderby=").Append(Uri.EscapeDataString(ConvertToString(orderby, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$orderby=").Append(System.Uri.EscapeDataString(ConvertToString(orderby, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (top != null)
             {
-                urlBuilder_.Append("$top=").Append(Uri.EscapeDataString(ConvertToString(top, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$top=").Append(System.Uri.EscapeDataString(ConvertToString(top, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (skip != null)
             {
-                urlBuilder_.Append("$skip=").Append(Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$skip=").Append(System.Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (inlinecount != null)
             {
-                urlBuilder_.Append("$inlinecount=").Append(Uri.EscapeDataString(ConvertToString(inlinecount, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$inlinecount=").Append(System.Uri.EscapeDataString(ConvertToString(inlinecount, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Method = new HttpMethod("GET");
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -355,13 +356,13 @@ namespace DataMosRu.Client
                         if (status_ == "200")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = default(IQueryable<ResultWithCount<DatasetListItem>>);
+                            var result_ = default(ResultWithCount<DatasetListItem>);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<IQueryable<ResultWithCount<DatasetListItem>>>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<ResultWithCount<DatasetListItem>>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -373,7 +374,7 @@ namespace DataMosRu.Client
                             throw new SwaggerException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
 
-                        return default(IQueryable<ResultWithCount<DatasetListItem>>);
+                        return default(ResultWithCount<DatasetListItem>);
                     }
                     finally
                     {
@@ -397,7 +398,7 @@ namespace DataMosRu.Client
         /// <param name="inlinecount">Принимает значение allpages для того, чтобы в ответе получить общее количество записей. По умолчанию общее количество записей не выводится.</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<IQueryable<ResultWithCount<DatasetListItem>>> GetListPost2Async(System.Collections.Generic.IEnumerable<string> projection, bool? foreign, string filter, string orderby, int? top, int? skip, string inlinecount)
+        public System.Threading.Tasks.Task<ResultWithCount<DatasetListItem>> GetListPost2Async(System.Collections.Generic.IEnumerable<string> projection, bool? foreign, string filter, string orderby, int? top, int? skip, string inlinecount)
         {
             return GetListPost2Async(projection, foreign, filter, orderby, top, skip, inlinecount, System.Threading.CancellationToken.None);
         }
@@ -413,56 +414,56 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<IQueryable<ResultWithCount<DatasetListItem>>> GetListPost2Async(System.Collections.Generic.IEnumerable<string> projection, bool? foreign, string filter, string orderby, int? top, int? skip, string inlinecount, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ResultWithCount<DatasetListItem>> GetListPost2Async(System.Collections.Generic.IEnumerable<string> projection, bool? foreign, string filter, string orderby, int? top, int? skip, string inlinecount, System.Threading.CancellationToken cancellationToken)
         {
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/datasets?");
             if (foreign != null)
             {
-                urlBuilder_.Append("foreign=").Append(Uri.EscapeDataString(ConvertToString(foreign, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("foreign=").Append(System.Uri.EscapeDataString(ConvertToString(foreign, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (filter != null)
             {
-                urlBuilder_.Append("$filter=").Append(Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$filter=").Append(System.Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (orderby != null)
             {
-                urlBuilder_.Append("$orderby=").Append(Uri.EscapeDataString(ConvertToString(orderby, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$orderby=").Append(System.Uri.EscapeDataString(ConvertToString(orderby, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (top != null)
             {
-                urlBuilder_.Append("$top=").Append(Uri.EscapeDataString(ConvertToString(top, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$top=").Append(System.Uri.EscapeDataString(ConvertToString(top, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (skip != null)
             {
-                urlBuilder_.Append("$skip=").Append(Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$skip=").Append(System.Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (inlinecount != null)
             {
-                urlBuilder_.Append("$inlinecount=").Append(Uri.EscapeDataString(ConvertToString(inlinecount, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$inlinecount=").Append(System.Uri.EscapeDataString(ConvertToString(inlinecount, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new StringContent(JsonConvert.SerializeObject(projection, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(projection, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
-                    request_.Method = new HttpMethod("POST");
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -475,13 +476,13 @@ namespace DataMosRu.Client
                         if (status_ == "200")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = default(IQueryable<ResultWithCount<DatasetListItem>>);
+                            var result_ = default(ResultWithCount<DatasetListItem>);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<IQueryable<ResultWithCount<DatasetListItem>>>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<ResultWithCount<DatasetListItem>>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -493,7 +494,7 @@ namespace DataMosRu.Client
                             throw new SwaggerException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
 
-                        return default(IQueryable<ResultWithCount<DatasetListItem>>);
+                        return default(ResultWithCount<DatasetListItem>);
                     }
                     finally
                     {
@@ -516,7 +517,7 @@ namespace DataMosRu.Client
         /// <param name="inlinecount">Принимает значение allpages для того, чтобы в ответе получить общее количество записей. По умолчанию общее количество записей не выводится.</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<IQueryable<ResultWithCount<DatasetListItem>>> GetListByDepartmentAsync(int departmentId, string filter, string orderby, int? top, int? skip, string inlinecount)
+        public System.Threading.Tasks.Task<ResultWithCount<DatasetListItem>> GetListByDepartmentAsync(int departmentId, string filter, string orderby, int? top, int? skip, string inlinecount)
         {
             return GetListByDepartmentAsync(departmentId, filter, orderby, top, skip, inlinecount, System.Threading.CancellationToken.None);
         }
@@ -531,53 +532,53 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<IQueryable<ResultWithCount<DatasetListItem>>> GetListByDepartmentAsync(int departmentId, string filter, string orderby, int? top, int? skip, string inlinecount, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ResultWithCount<DatasetListItem>> GetListByDepartmentAsync(int departmentId, string filter, string orderby, int? top, int? skip, string inlinecount, System.Threading.CancellationToken cancellationToken)
         {
             if (departmentId == null)
-                throw new ArgumentNullException("departmentId");
+                throw new System.ArgumentNullException("departmentId");
 
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/departments/{departmentId}/classifiers?");
-            urlBuilder_.Replace("{departmentId}", Uri.EscapeDataString(ConvertToString(departmentId, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{departmentId}", System.Uri.EscapeDataString(ConvertToString(departmentId, System.Globalization.CultureInfo.InvariantCulture)));
             if (filter != null)
             {
-                urlBuilder_.Append("$filter=").Append(Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$filter=").Append(System.Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (orderby != null)
             {
-                urlBuilder_.Append("$orderby=").Append(Uri.EscapeDataString(ConvertToString(orderby, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$orderby=").Append(System.Uri.EscapeDataString(ConvertToString(orderby, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (top != null)
             {
-                urlBuilder_.Append("$top=").Append(Uri.EscapeDataString(ConvertToString(top, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$top=").Append(System.Uri.EscapeDataString(ConvertToString(top, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (skip != null)
             {
-                urlBuilder_.Append("$skip=").Append(Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$skip=").Append(System.Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (inlinecount != null)
             {
-                urlBuilder_.Append("$inlinecount=").Append(Uri.EscapeDataString(ConvertToString(inlinecount, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$inlinecount=").Append(System.Uri.EscapeDataString(ConvertToString(inlinecount, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Method = new HttpMethod("GET");
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -590,13 +591,13 @@ namespace DataMosRu.Client
                         if (status_ == "200")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = default(IQueryable<ResultWithCount<DatasetListItem>>);
+                            var result_ = default(ResultWithCount<DatasetListItem>);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<IQueryable<ResultWithCount<DatasetListItem>>>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<ResultWithCount<DatasetListItem>>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -608,7 +609,7 @@ namespace DataMosRu.Client
                             throw new SwaggerException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
 
-                        return default(IQueryable<ResultWithCount<DatasetListItem>>);
+                        return default(ResultWithCount<DatasetListItem>);
                     }
                     finally
                     {
@@ -632,7 +633,7 @@ namespace DataMosRu.Client
         /// <param name="inlinecount">Принимает значение allpages для того, чтобы в ответе получить общее количество записей. По умолчанию общее количество записей не выводится.</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<IQueryable<ResultWithCount<DatasetListItem>>> GetListByDepartmentPostAsync(int departmentId, System.Collections.Generic.IEnumerable<string> projection, string filter, string orderby, int? top, int? skip, string inlinecount)
+        public System.Threading.Tasks.Task<ResultWithCount<DatasetListItem>> GetListByDepartmentPostAsync(int departmentId, System.Collections.Generic.IEnumerable<string> projection, string filter, string orderby, int? top, int? skip, string inlinecount)
         {
             return GetListByDepartmentPostAsync(departmentId, projection, filter, orderby, top, skip, inlinecount, System.Threading.CancellationToken.None);
         }
@@ -648,56 +649,56 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<IQueryable<ResultWithCount<DatasetListItem>>> GetListByDepartmentPostAsync(int departmentId, System.Collections.Generic.IEnumerable<string> projection, string filter, string orderby, int? top, int? skip, string inlinecount, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ResultWithCount<DatasetListItem>> GetListByDepartmentPostAsync(int departmentId, System.Collections.Generic.IEnumerable<string> projection, string filter, string orderby, int? top, int? skip, string inlinecount, System.Threading.CancellationToken cancellationToken)
         {
             if (departmentId == null)
-                throw new ArgumentNullException("departmentId");
+                throw new System.ArgumentNullException("departmentId");
 
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/departments/{departmentId}/classifiers?");
-            urlBuilder_.Replace("{departmentId}", Uri.EscapeDataString(ConvertToString(departmentId, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{departmentId}", System.Uri.EscapeDataString(ConvertToString(departmentId, System.Globalization.CultureInfo.InvariantCulture)));
             if (filter != null)
             {
-                urlBuilder_.Append("$filter=").Append(Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$filter=").Append(System.Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (orderby != null)
             {
-                urlBuilder_.Append("$orderby=").Append(Uri.EscapeDataString(ConvertToString(orderby, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$orderby=").Append(System.Uri.EscapeDataString(ConvertToString(orderby, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (top != null)
             {
-                urlBuilder_.Append("$top=").Append(Uri.EscapeDataString(ConvertToString(top, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$top=").Append(System.Uri.EscapeDataString(ConvertToString(top, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (skip != null)
             {
-                urlBuilder_.Append("$skip=").Append(Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$skip=").Append(System.Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (inlinecount != null)
             {
-                urlBuilder_.Append("$inlinecount=").Append(Uri.EscapeDataString(ConvertToString(inlinecount, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$inlinecount=").Append(System.Uri.EscapeDataString(ConvertToString(inlinecount, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new StringContent(JsonConvert.SerializeObject(projection, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(projection, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
-                    request_.Method = new HttpMethod("POST");
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -710,13 +711,13 @@ namespace DataMosRu.Client
                         if (status_ == "200")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = default(IQueryable<ResultWithCount<DatasetListItem>>);
+                            var result_ = default(ResultWithCount<DatasetListItem>);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<IQueryable<ResultWithCount<DatasetListItem>>>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<ResultWithCount<DatasetListItem>>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -728,7 +729,7 @@ namespace DataMosRu.Client
                             throw new SwaggerException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
 
-                        return default(IQueryable<ResultWithCount<DatasetListItem>>);
+                        return default(ResultWithCount<DatasetListItem>);
                     }
                     finally
                     {
@@ -751,7 +752,7 @@ namespace DataMosRu.Client
         /// <param name="inlinecount">Принимает значение allpages для того, чтобы в ответе получить общее количество записей. По умолчанию общее количество записей не выводится.</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<IQueryable<ResultWithCount<DatasetListItem>>> GetListByDepartment2Async(int departmentId, string filter, string orderby, int? top, int? skip, string inlinecount)
+        public System.Threading.Tasks.Task<ResultWithCount<DatasetListItem>> GetListByDepartment2Async(int departmentId, string filter, string orderby, int? top, int? skip, string inlinecount)
         {
             return GetListByDepartment2Async(departmentId, filter, orderby, top, skip, inlinecount, System.Threading.CancellationToken.None);
         }
@@ -766,53 +767,53 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<IQueryable<ResultWithCount<DatasetListItem>>> GetListByDepartment2Async(int departmentId, string filter, string orderby, int? top, int? skip, string inlinecount, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ResultWithCount<DatasetListItem>> GetListByDepartment2Async(int departmentId, string filter, string orderby, int? top, int? skip, string inlinecount, System.Threading.CancellationToken cancellationToken)
         {
             if (departmentId == null)
-                throw new ArgumentNullException("departmentId");
+                throw new System.ArgumentNullException("departmentId");
 
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/departments/{departmentId}/datasets?");
-            urlBuilder_.Replace("{departmentId}", Uri.EscapeDataString(ConvertToString(departmentId, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{departmentId}", System.Uri.EscapeDataString(ConvertToString(departmentId, System.Globalization.CultureInfo.InvariantCulture)));
             if (filter != null)
             {
-                urlBuilder_.Append("$filter=").Append(Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$filter=").Append(System.Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (orderby != null)
             {
-                urlBuilder_.Append("$orderby=").Append(Uri.EscapeDataString(ConvertToString(orderby, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$orderby=").Append(System.Uri.EscapeDataString(ConvertToString(orderby, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (top != null)
             {
-                urlBuilder_.Append("$top=").Append(Uri.EscapeDataString(ConvertToString(top, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$top=").Append(System.Uri.EscapeDataString(ConvertToString(top, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (skip != null)
             {
-                urlBuilder_.Append("$skip=").Append(Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$skip=").Append(System.Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (inlinecount != null)
             {
-                urlBuilder_.Append("$inlinecount=").Append(Uri.EscapeDataString(ConvertToString(inlinecount, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$inlinecount=").Append(System.Uri.EscapeDataString(ConvertToString(inlinecount, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Method = new HttpMethod("GET");
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -825,13 +826,13 @@ namespace DataMosRu.Client
                         if (status_ == "200")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = default(IQueryable<ResultWithCount<DatasetListItem>>);
+                            var result_ = default(ResultWithCount<DatasetListItem>);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<IQueryable<ResultWithCount<DatasetListItem>>>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<ResultWithCount<DatasetListItem>>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -843,7 +844,7 @@ namespace DataMosRu.Client
                             throw new SwaggerException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
 
-                        return default(IQueryable<ResultWithCount<DatasetListItem>>);
+                        return default(ResultWithCount<DatasetListItem>);
                     }
                     finally
                     {
@@ -867,7 +868,7 @@ namespace DataMosRu.Client
         /// <param name="inlinecount">Принимает значение allpages для того, чтобы в ответе получить общее количество записей. По умолчанию общее количество записей не выводится.</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<IQueryable<ResultWithCount<DatasetListItem>>> GetListByDepartmentPost2Async(int departmentId, System.Collections.Generic.IEnumerable<string> projection, string filter, string orderby, int? top, int? skip, string inlinecount)
+        public System.Threading.Tasks.Task<ResultWithCount<DatasetListItem>> GetListByDepartmentPost2Async(int departmentId, System.Collections.Generic.IEnumerable<string> projection, string filter, string orderby, int? top, int? skip, string inlinecount)
         {
             return GetListByDepartmentPost2Async(departmentId, projection, filter, orderby, top, skip, inlinecount, System.Threading.CancellationToken.None);
         }
@@ -883,56 +884,56 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<IQueryable<ResultWithCount<DatasetListItem>>> GetListByDepartmentPost2Async(int departmentId, System.Collections.Generic.IEnumerable<string> projection, string filter, string orderby, int? top, int? skip, string inlinecount, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ResultWithCount<DatasetListItem>> GetListByDepartmentPost2Async(int departmentId, System.Collections.Generic.IEnumerable<string> projection, string filter, string orderby, int? top, int? skip, string inlinecount, System.Threading.CancellationToken cancellationToken)
         {
             if (departmentId == null)
-                throw new ArgumentNullException("departmentId");
+                throw new System.ArgumentNullException("departmentId");
 
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/departments/{departmentId}/datasets?");
-            urlBuilder_.Replace("{departmentId}", Uri.EscapeDataString(ConvertToString(departmentId, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{departmentId}", System.Uri.EscapeDataString(ConvertToString(departmentId, System.Globalization.CultureInfo.InvariantCulture)));
             if (filter != null)
             {
-                urlBuilder_.Append("$filter=").Append(Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$filter=").Append(System.Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (orderby != null)
             {
-                urlBuilder_.Append("$orderby=").Append(Uri.EscapeDataString(ConvertToString(orderby, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$orderby=").Append(System.Uri.EscapeDataString(ConvertToString(orderby, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (top != null)
             {
-                urlBuilder_.Append("$top=").Append(Uri.EscapeDataString(ConvertToString(top, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$top=").Append(System.Uri.EscapeDataString(ConvertToString(top, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (skip != null)
             {
-                urlBuilder_.Append("$skip=").Append(Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$skip=").Append(System.Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (inlinecount != null)
             {
-                urlBuilder_.Append("$inlinecount=").Append(Uri.EscapeDataString(ConvertToString(inlinecount, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$inlinecount=").Append(System.Uri.EscapeDataString(ConvertToString(inlinecount, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new StringContent(JsonConvert.SerializeObject(projection, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(projection, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
-                    request_.Method = new HttpMethod("POST");
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -945,13 +946,13 @@ namespace DataMosRu.Client
                         if (status_ == "200")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = default(IQueryable<ResultWithCount<DatasetListItem>>);
+                            var result_ = default(ResultWithCount<DatasetListItem>);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<IQueryable<ResultWithCount<DatasetListItem>>>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<ResultWithCount<DatasetListItem>>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -963,7 +964,7 @@ namespace DataMosRu.Client
                             throw new SwaggerException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
 
-                        return default(IQueryable<ResultWithCount<DatasetListItem>>);
+                        return default(ResultWithCount<DatasetListItem>);
                     }
                     finally
                     {
@@ -986,7 +987,7 @@ namespace DataMosRu.Client
         /// <param name="inlinecount">Принимает значение allpages для того, чтобы в ответе получить общее количество записей. По умолчанию общее количество записей не выводится.</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<IQueryable<ResultWithCount<DatasetListItem>>> GetListByCategoryAsync(int categoryId, string filter, string orderby, int? top, int? skip, string inlinecount)
+        public System.Threading.Tasks.Task<ResultWithCount<DatasetListItem>> GetListByCategoryAsync(int categoryId, string filter, string orderby, int? top, int? skip, string inlinecount)
         {
             return GetListByCategoryAsync(categoryId, filter, orderby, top, skip, inlinecount, System.Threading.CancellationToken.None);
         }
@@ -1001,53 +1002,53 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<IQueryable<ResultWithCount<DatasetListItem>>> GetListByCategoryAsync(int categoryId, string filter, string orderby, int? top, int? skip, string inlinecount, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ResultWithCount<DatasetListItem>> GetListByCategoryAsync(int categoryId, string filter, string orderby, int? top, int? skip, string inlinecount, System.Threading.CancellationToken cancellationToken)
         {
             if (categoryId == null)
-                throw new ArgumentNullException("categoryId");
+                throw new System.ArgumentNullException("categoryId");
 
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/categories/{categoryId}/classifiers?");
-            urlBuilder_.Replace("{categoryId}", Uri.EscapeDataString(ConvertToString(categoryId, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{categoryId}", System.Uri.EscapeDataString(ConvertToString(categoryId, System.Globalization.CultureInfo.InvariantCulture)));
             if (filter != null)
             {
-                urlBuilder_.Append("$filter=").Append(Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$filter=").Append(System.Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (orderby != null)
             {
-                urlBuilder_.Append("$orderby=").Append(Uri.EscapeDataString(ConvertToString(orderby, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$orderby=").Append(System.Uri.EscapeDataString(ConvertToString(orderby, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (top != null)
             {
-                urlBuilder_.Append("$top=").Append(Uri.EscapeDataString(ConvertToString(top, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$top=").Append(System.Uri.EscapeDataString(ConvertToString(top, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (skip != null)
             {
-                urlBuilder_.Append("$skip=").Append(Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$skip=").Append(System.Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (inlinecount != null)
             {
-                urlBuilder_.Append("$inlinecount=").Append(Uri.EscapeDataString(ConvertToString(inlinecount, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$inlinecount=").Append(System.Uri.EscapeDataString(ConvertToString(inlinecount, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Method = new HttpMethod("GET");
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -1060,13 +1061,13 @@ namespace DataMosRu.Client
                         if (status_ == "200")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = default(IQueryable<ResultWithCount<DatasetListItem>>);
+                            var result_ = default(ResultWithCount<DatasetListItem>);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<IQueryable<ResultWithCount<DatasetListItem>>>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<ResultWithCount<DatasetListItem>>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -1078,7 +1079,7 @@ namespace DataMosRu.Client
                             throw new SwaggerException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
 
-                        return default(IQueryable<ResultWithCount<DatasetListItem>>);
+                        return default(ResultWithCount<DatasetListItem>);
                     }
                     finally
                     {
@@ -1102,7 +1103,7 @@ namespace DataMosRu.Client
         /// <param name="inlinecount">Принимает значение allpages для того, чтобы в ответе получить общее количество записей. По умолчанию общее количество записей не выводится.</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<object> GetListByCategory2Async(int categoryId, System.Collections.Generic.IEnumerable<string> projection, string filter, string orderby, int? top, int? skip, string inlinecount)
+        public System.Threading.Tasks.Task<object> GetListByCategory2Async(int categoryId, System.Collections.Generic.IEnumerable<string> projection, string filter, string orderby, int? top, int? skip, string inlinecount)
         {
             return GetListByCategory2Async(categoryId, projection, filter, orderby, top, skip, inlinecount, System.Threading.CancellationToken.None);
         }
@@ -1118,56 +1119,56 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<object> GetListByCategory2Async(int categoryId, System.Collections.Generic.IEnumerable<string> projection, string filter, string orderby, int? top, int? skip, string inlinecount, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<object> GetListByCategory2Async(int categoryId, System.Collections.Generic.IEnumerable<string> projection, string filter, string orderby, int? top, int? skip, string inlinecount, System.Threading.CancellationToken cancellationToken)
         {
             if (categoryId == null)
-                throw new ArgumentNullException("categoryId");
+                throw new System.ArgumentNullException("categoryId");
 
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/categories/{categoryId}/classifiers?");
-            urlBuilder_.Replace("{categoryId}", Uri.EscapeDataString(ConvertToString(categoryId, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{categoryId}", System.Uri.EscapeDataString(ConvertToString(categoryId, System.Globalization.CultureInfo.InvariantCulture)));
             if (filter != null)
             {
-                urlBuilder_.Append("$filter=").Append(Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$filter=").Append(System.Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (orderby != null)
             {
-                urlBuilder_.Append("$orderby=").Append(Uri.EscapeDataString(ConvertToString(orderby, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$orderby=").Append(System.Uri.EscapeDataString(ConvertToString(orderby, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (top != null)
             {
-                urlBuilder_.Append("$top=").Append(Uri.EscapeDataString(ConvertToString(top, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$top=").Append(System.Uri.EscapeDataString(ConvertToString(top, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (skip != null)
             {
-                urlBuilder_.Append("$skip=").Append(Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$skip=").Append(System.Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (inlinecount != null)
             {
-                urlBuilder_.Append("$inlinecount=").Append(Uri.EscapeDataString(ConvertToString(inlinecount, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$inlinecount=").Append(System.Uri.EscapeDataString(ConvertToString(inlinecount, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new StringContent(JsonConvert.SerializeObject(projection, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(projection, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
-                    request_.Method = new HttpMethod("POST");
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -1183,10 +1184,10 @@ namespace DataMosRu.Client
                             var result_ = default(object);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<object>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<object>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -1221,7 +1222,7 @@ namespace DataMosRu.Client
         /// <param name="inlinecount">Принимает значение allpages для того, чтобы в ответе получить общее количество записей. По умолчанию общее количество записей не выводится.</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<IQueryable<ResultWithCount<DatasetListItem>>> GetListByCategory3Async(int categoryId, string filter, string orderby, int? top, int? skip, string inlinecount)
+        public System.Threading.Tasks.Task<ResultWithCount<DatasetListItem>> GetListByCategory3Async(int categoryId, string filter, string orderby, int? top, int? skip, string inlinecount)
         {
             return GetListByCategory3Async(categoryId, filter, orderby, top, skip, inlinecount, System.Threading.CancellationToken.None);
         }
@@ -1236,53 +1237,53 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<IQueryable<ResultWithCount<DatasetListItem>>> GetListByCategory3Async(int categoryId, string filter, string orderby, int? top, int? skip, string inlinecount, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ResultWithCount<DatasetListItem>> GetListByCategory3Async(int categoryId, string filter, string orderby, int? top, int? skip, string inlinecount, System.Threading.CancellationToken cancellationToken)
         {
             if (categoryId == null)
-                throw new ArgumentNullException("categoryId");
+                throw new System.ArgumentNullException("categoryId");
 
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/categories/{categoryId}/datasets?");
-            urlBuilder_.Replace("{categoryId}", Uri.EscapeDataString(ConvertToString(categoryId, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{categoryId}", System.Uri.EscapeDataString(ConvertToString(categoryId, System.Globalization.CultureInfo.InvariantCulture)));
             if (filter != null)
             {
-                urlBuilder_.Append("$filter=").Append(Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$filter=").Append(System.Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (orderby != null)
             {
-                urlBuilder_.Append("$orderby=").Append(Uri.EscapeDataString(ConvertToString(orderby, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$orderby=").Append(System.Uri.EscapeDataString(ConvertToString(orderby, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (top != null)
             {
-                urlBuilder_.Append("$top=").Append(Uri.EscapeDataString(ConvertToString(top, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$top=").Append(System.Uri.EscapeDataString(ConvertToString(top, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (skip != null)
             {
-                urlBuilder_.Append("$skip=").Append(Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$skip=").Append(System.Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (inlinecount != null)
             {
-                urlBuilder_.Append("$inlinecount=").Append(Uri.EscapeDataString(ConvertToString(inlinecount, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$inlinecount=").Append(System.Uri.EscapeDataString(ConvertToString(inlinecount, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Method = new HttpMethod("GET");
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -1295,13 +1296,13 @@ namespace DataMosRu.Client
                         if (status_ == "200")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = default(IQueryable<ResultWithCount<DatasetListItem>>);
+                            var result_ = default(ResultWithCount<DatasetListItem>);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<IQueryable<ResultWithCount<DatasetListItem>>>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<ResultWithCount<DatasetListItem>>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -1313,7 +1314,7 @@ namespace DataMosRu.Client
                             throw new SwaggerException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
 
-                        return default(IQueryable<ResultWithCount<DatasetListItem>>);
+                        return default(ResultWithCount<DatasetListItem>);
                     }
                     finally
                     {
@@ -1337,7 +1338,7 @@ namespace DataMosRu.Client
         /// <param name="inlinecount">Принимает значение allpages для того, чтобы в ответе получить общее количество записей. По умолчанию общее количество записей не выводится.</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<object> GetListByCategory4Async(int categoryId, System.Collections.Generic.IEnumerable<string> projection, string filter, string orderby, int? top, int? skip, string inlinecount)
+        public System.Threading.Tasks.Task<object> GetListByCategory4Async(int categoryId, System.Collections.Generic.IEnumerable<string> projection, string filter, string orderby, int? top, int? skip, string inlinecount)
         {
             return GetListByCategory4Async(categoryId, projection, filter, orderby, top, skip, inlinecount, System.Threading.CancellationToken.None);
         }
@@ -1353,56 +1354,56 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<object> GetListByCategory4Async(int categoryId, System.Collections.Generic.IEnumerable<string> projection, string filter, string orderby, int? top, int? skip, string inlinecount, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<object> GetListByCategory4Async(int categoryId, System.Collections.Generic.IEnumerable<string> projection, string filter, string orderby, int? top, int? skip, string inlinecount, System.Threading.CancellationToken cancellationToken)
         {
             if (categoryId == null)
-                throw new ArgumentNullException("categoryId");
+                throw new System.ArgumentNullException("categoryId");
 
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/categories/{categoryId}/datasets?");
-            urlBuilder_.Replace("{categoryId}", Uri.EscapeDataString(ConvertToString(categoryId, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{categoryId}", System.Uri.EscapeDataString(ConvertToString(categoryId, System.Globalization.CultureInfo.InvariantCulture)));
             if (filter != null)
             {
-                urlBuilder_.Append("$filter=").Append(Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$filter=").Append(System.Uri.EscapeDataString(ConvertToString(filter, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (orderby != null)
             {
-                urlBuilder_.Append("$orderby=").Append(Uri.EscapeDataString(ConvertToString(orderby, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$orderby=").Append(System.Uri.EscapeDataString(ConvertToString(orderby, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (top != null)
             {
-                urlBuilder_.Append("$top=").Append(Uri.EscapeDataString(ConvertToString(top, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$top=").Append(System.Uri.EscapeDataString(ConvertToString(top, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (skip != null)
             {
-                urlBuilder_.Append("$skip=").Append(Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$skip=").Append(System.Uri.EscapeDataString(ConvertToString(skip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             if (inlinecount != null)
             {
-                urlBuilder_.Append("$inlinecount=").Append(Uri.EscapeDataString(ConvertToString(inlinecount, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("$inlinecount=").Append(System.Uri.EscapeDataString(ConvertToString(inlinecount, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new StringContent(JsonConvert.SerializeObject(projection, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(projection, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
-                    request_.Method = new HttpMethod("POST");
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -1418,10 +1419,10 @@ namespace DataMosRu.Client
                             var result_ = default(object);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<object>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<object>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -1451,7 +1452,7 @@ namespace DataMosRu.Client
         /// <param name="id">Идентификатор набора данных</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<DatasetItem> GetItemAsync(int id)
+        public System.Threading.Tasks.Task<DatasetItem> GetItemAsync(int id)
         {
             return GetItemAsync(id, System.Threading.CancellationToken.None);
         }
@@ -1461,32 +1462,32 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<DatasetItem> GetItemAsync(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<DatasetItem> GetItemAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
-                throw new ArgumentNullException("id");
+                throw new System.ArgumentNullException("id");
 
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/classifiers/{id}");
-            urlBuilder_.Replace("{id}", Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Method = new HttpMethod("GET");
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -1502,10 +1503,10 @@ namespace DataMosRu.Client
                             var result_ = default(DatasetItem);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<DatasetItem>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<DatasetItem>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -1536,7 +1537,7 @@ namespace DataMosRu.Client
         /// <param name="projection">Список возвращаемых полей в ответе запроса</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<DatasetItem> GetItemPostAsync(int id, System.Collections.Generic.IEnumerable<string> projection)
+        public System.Threading.Tasks.Task<DatasetItem> GetItemPostAsync(int id, System.Collections.Generic.IEnumerable<string> projection)
         {
             return GetItemPostAsync(id, projection, System.Threading.CancellationToken.None);
         }
@@ -1547,35 +1548,35 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<DatasetItem> GetItemPostAsync(int id, System.Collections.Generic.IEnumerable<string> projection, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<DatasetItem> GetItemPostAsync(int id, System.Collections.Generic.IEnumerable<string> projection, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
-                throw new ArgumentNullException("id");
+                throw new System.ArgumentNullException("id");
 
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/classifiers/{id}");
-            urlBuilder_.Replace("{id}", Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new StringContent(JsonConvert.SerializeObject(projection, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(projection, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
-                    request_.Method = new HttpMethod("POST");
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -1591,10 +1592,10 @@ namespace DataMosRu.Client
                             var result_ = default(DatasetItem);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<DatasetItem>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<DatasetItem>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -1624,7 +1625,7 @@ namespace DataMosRu.Client
         /// <param name="id">Идентификатор набора данных</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<DatasetItem> GetItem2Async(int id)
+        public System.Threading.Tasks.Task<DatasetItem> GetItem2Async(int id)
         {
             return GetItem2Async(id, System.Threading.CancellationToken.None);
         }
@@ -1634,32 +1635,32 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<DatasetItem> GetItem2Async(int id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<DatasetItem> GetItem2Async(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
-                throw new ArgumentNullException("id");
+                throw new System.ArgumentNullException("id");
 
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/datasets/{id}");
-            urlBuilder_.Replace("{id}", Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Method = new HttpMethod("GET");
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -1675,10 +1676,10 @@ namespace DataMosRu.Client
                             var result_ = default(DatasetItem);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<DatasetItem>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<DatasetItem>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -1709,7 +1710,7 @@ namespace DataMosRu.Client
         /// <param name="projection">Список возвращаемых полей в ответе запроса</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<DatasetItem> GetItemPost2Async(int id, System.Collections.Generic.IEnumerable<string> projection)
+        public System.Threading.Tasks.Task<DatasetItem> GetItemPost2Async(int id, System.Collections.Generic.IEnumerable<string> projection)
         {
             return GetItemPost2Async(id, projection, System.Threading.CancellationToken.None);
         }
@@ -1720,35 +1721,35 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<DatasetItem> GetItemPost2Async(int id, System.Collections.Generic.IEnumerable<string> projection, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<DatasetItem> GetItemPost2Async(int id, System.Collections.Generic.IEnumerable<string> projection, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
-                throw new ArgumentNullException("id");
+                throw new System.ArgumentNullException("id");
 
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/datasets/{id}");
-            urlBuilder_.Replace("{id}", Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new StringContent(JsonConvert.SerializeObject(projection, _settings.Value));
+                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(projection, _settings.Value));
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
-                    request_.Method = new HttpMethod("POST");
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -1764,10 +1765,10 @@ namespace DataMosRu.Client
                             var result_ = default(DatasetItem);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<DatasetItem>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<DatasetItem>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -1797,7 +1798,7 @@ namespace DataMosRu.Client
         /// <param name="datasetId">Идентификатор набора данных</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<DatasetVersionItem> GetVersionAsync(int datasetId)
+        public System.Threading.Tasks.Task<DatasetVersionItem> GetVersionAsync(int datasetId)
         {
             return GetVersionAsync(datasetId, System.Threading.CancellationToken.None);
         }
@@ -1807,32 +1808,32 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<DatasetVersionItem> GetVersionAsync(int datasetId, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<DatasetVersionItem> GetVersionAsync(int datasetId, System.Threading.CancellationToken cancellationToken)
         {
             if (datasetId == null)
-                throw new ArgumentNullException("datasetId");
+                throw new System.ArgumentNullException("datasetId");
 
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/classifiers/{datasetId}/version");
-            urlBuilder_.Replace("{datasetId}", Uri.EscapeDataString(ConvertToString(datasetId, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{datasetId}", System.Uri.EscapeDataString(ConvertToString(datasetId, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Method = new HttpMethod("GET");
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -1848,10 +1849,10 @@ namespace DataMosRu.Client
                             var result_ = default(DatasetVersionItem);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<DatasetVersionItem>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<DatasetVersionItem>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -1881,7 +1882,7 @@ namespace DataMosRu.Client
         /// <param name="datasetId">Идентификатор набора данных</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<DatasetVersionItem> GetVersion2Async(int datasetId)
+        public System.Threading.Tasks.Task<DatasetVersionItem> GetVersion2Async(int datasetId)
         {
             return GetVersion2Async(datasetId, System.Threading.CancellationToken.None);
         }
@@ -1891,32 +1892,32 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<DatasetVersionItem> GetVersion2Async(int datasetId, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<DatasetVersionItem> GetVersion2Async(int datasetId, System.Threading.CancellationToken cancellationToken)
         {
             if (datasetId == null)
-                throw new ArgumentNullException("datasetId");
+                throw new System.ArgumentNullException("datasetId");
 
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/datasets/{datasetId}/version");
-            urlBuilder_.Replace("{datasetId}", Uri.EscapeDataString(ConvertToString(datasetId, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{datasetId}", System.Uri.EscapeDataString(ConvertToString(datasetId, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Method = new HttpMethod("GET");
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -1932,10 +1933,10 @@ namespace DataMosRu.Client
                             var result_ = default(DatasetVersionItem);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<DatasetVersionItem>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<DatasetVersionItem>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -1966,7 +1967,7 @@ namespace DataMosRu.Client
         /// <param name="size">Размер</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<object> GetTransparentIconAsync(int datasetId, string size)
+        public System.Threading.Tasks.Task<object> GetTransparentIconAsync(int datasetId, string size)
         {
             return GetTransparentIconAsync(datasetId, size, System.Threading.CancellationToken.None);
         }
@@ -1977,36 +1978,36 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<object> GetTransparentIconAsync(int datasetId, string size, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<object> GetTransparentIconAsync(int datasetId, string size, System.Threading.CancellationToken cancellationToken)
         {
             if (datasetId == null)
-                throw new ArgumentNullException("datasetId");
+                throw new System.ArgumentNullException("datasetId");
 
             if (size == null)
-                throw new ArgumentNullException("size");
+                throw new System.ArgumentNullException("size");
 
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/classifiers/{datasetId}/icon/{size}");
-            urlBuilder_.Replace("{datasetId}", Uri.EscapeDataString(ConvertToString(datasetId, System.Globalization.CultureInfo.InvariantCulture)));
-            urlBuilder_.Replace("{size}", Uri.EscapeDataString(ConvertToString(size, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{datasetId}", System.Uri.EscapeDataString(ConvertToString(datasetId, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{size}", System.Uri.EscapeDataString(ConvertToString(size, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Method = new HttpMethod("GET");
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("image/png"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -2022,10 +2023,10 @@ namespace DataMosRu.Client
                             var result_ = default(object);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<object>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<object>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -2056,7 +2057,7 @@ namespace DataMosRu.Client
         /// <param name="size">Размер</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<object> GetTransparentIcon2Async(int datasetId, string size)
+        public System.Threading.Tasks.Task<object> GetTransparentIcon2Async(int datasetId, string size)
         {
             return GetTransparentIcon2Async(datasetId, size, System.Threading.CancellationToken.None);
         }
@@ -2067,36 +2068,36 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<object> GetTransparentIcon2Async(int datasetId, string size, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<object> GetTransparentIcon2Async(int datasetId, string size, System.Threading.CancellationToken cancellationToken)
         {
             if (datasetId == null)
-                throw new ArgumentNullException("datasetId");
+                throw new System.ArgumentNullException("datasetId");
 
             if (size == null)
-                throw new ArgumentNullException("size");
+                throw new System.ArgumentNullException("size");
 
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/datasets/{datasetId}/icon/{size}");
-            urlBuilder_.Replace("{datasetId}", Uri.EscapeDataString(ConvertToString(datasetId, System.Globalization.CultureInfo.InvariantCulture)));
-            urlBuilder_.Replace("{size}", Uri.EscapeDataString(ConvertToString(size, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{datasetId}", System.Uri.EscapeDataString(ConvertToString(datasetId, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{size}", System.Uri.EscapeDataString(ConvertToString(size, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Method = new HttpMethod("GET");
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("image/png"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -2112,10 +2113,10 @@ namespace DataMosRu.Client
                             var result_ = default(object);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<object>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<object>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -2145,7 +2146,7 @@ namespace DataMosRu.Client
         /// <param name="datasetId">Идентификатор набора данных</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<object> GetMarkerAsync(int datasetId)
+        public System.Threading.Tasks.Task<object> GetMarkerAsync(int datasetId)
         {
             return GetMarkerAsync(datasetId, System.Threading.CancellationToken.None);
         }
@@ -2155,32 +2156,32 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<object> GetMarkerAsync(int datasetId, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<object> GetMarkerAsync(int datasetId, System.Threading.CancellationToken cancellationToken)
         {
             if (datasetId == null)
-                throw new ArgumentNullException("datasetId");
+                throw new System.ArgumentNullException("datasetId");
 
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/datasets/{datasetId}/marker");
-            urlBuilder_.Replace("{datasetId}", Uri.EscapeDataString(ConvertToString(datasetId, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{datasetId}", System.Uri.EscapeDataString(ConvertToString(datasetId, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Method = new HttpMethod("GET");
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/xml"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -2196,10 +2197,10 @@ namespace DataMosRu.Client
                             var result_ = default(object);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<object>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<object>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -2229,7 +2230,7 @@ namespace DataMosRu.Client
         /// <param name="datasetId">Идентификатор набора данных</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<object> GetMarker2Async(int datasetId)
+        public System.Threading.Tasks.Task<object> GetMarker2Async(int datasetId)
         {
             return GetMarker2Async(datasetId, System.Threading.CancellationToken.None);
         }
@@ -2239,32 +2240,32 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<object> GetMarker2Async(int datasetId, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<object> GetMarker2Async(int datasetId, System.Threading.CancellationToken cancellationToken)
         {
             if (datasetId == null)
-                throw new ArgumentNullException("datasetId");
+                throw new System.ArgumentNullException("datasetId");
 
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/classifiers/{datasetId}/marker");
-            urlBuilder_.Replace("{datasetId}", Uri.EscapeDataString(ConvertToString(datasetId, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{datasetId}", System.Uri.EscapeDataString(ConvertToString(datasetId, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Method = new HttpMethod("GET");
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/xml"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -2280,10 +2281,10 @@ namespace DataMosRu.Client
                             var result_ = default(object);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<object>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<object>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -2315,7 +2316,7 @@ namespace DataMosRu.Client
         /// <param name="transparent">При значениее true, подложка иконки будет отсутствовать</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<object> GetIconAsync(int datasetId, int width, bool? transparent)
+        public System.Threading.Tasks.Task<object> GetIconAsync(int datasetId, int width, bool? transparent)
         {
             return GetIconAsync(datasetId, width, transparent, System.Threading.CancellationToken.None);
         }
@@ -2327,41 +2328,41 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<object> GetIconAsync(int datasetId, int width, bool? transparent, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<object> GetIconAsync(int datasetId, int width, bool? transparent, System.Threading.CancellationToken cancellationToken)
         {
             if (datasetId == null)
-                throw new ArgumentNullException("datasetId");
+                throw new System.ArgumentNullException("datasetId");
 
             if (width == null)
-                throw new ArgumentNullException("width");
+                throw new System.ArgumentNullException("width");
 
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/classifiers/{datasetId}/Image/{width}?");
-            urlBuilder_.Replace("{datasetId}", Uri.EscapeDataString(ConvertToString(datasetId, System.Globalization.CultureInfo.InvariantCulture)));
-            urlBuilder_.Replace("{width}", Uri.EscapeDataString(ConvertToString(width, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{datasetId}", System.Uri.EscapeDataString(ConvertToString(datasetId, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{width}", System.Uri.EscapeDataString(ConvertToString(width, System.Globalization.CultureInfo.InvariantCulture)));
             if (transparent != null)
             {
-                urlBuilder_.Append("transparent=").Append(Uri.EscapeDataString(ConvertToString(transparent, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("transparent=").Append(System.Uri.EscapeDataString(ConvertToString(transparent, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Method = new HttpMethod("GET");
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("image/png"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -2377,10 +2378,10 @@ namespace DataMosRu.Client
                             var result_ = default(object);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<object>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<object>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -2412,7 +2413,7 @@ namespace DataMosRu.Client
         /// <param name="transparent">При значениее true, подложка иконки будет отсутствовать</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<object> GetIcon2Async(int datasetId, int width, bool? transparent)
+        public System.Threading.Tasks.Task<object> GetIcon2Async(int datasetId, int width, bool? transparent)
         {
             return GetIcon2Async(datasetId, width, transparent, System.Threading.CancellationToken.None);
         }
@@ -2424,41 +2425,41 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<object> GetIcon2Async(int datasetId, int width, bool? transparent, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<object> GetIcon2Async(int datasetId, int width, bool? transparent, System.Threading.CancellationToken cancellationToken)
         {
             if (datasetId == null)
-                throw new ArgumentNullException("datasetId");
+                throw new System.ArgumentNullException("datasetId");
 
             if (width == null)
-                throw new ArgumentNullException("width");
+                throw new System.ArgumentNullException("width");
 
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/datasets/{datasetId}/Image/{width}?");
-            urlBuilder_.Replace("{datasetId}", Uri.EscapeDataString(ConvertToString(datasetId, System.Globalization.CultureInfo.InvariantCulture)));
-            urlBuilder_.Replace("{width}", Uri.EscapeDataString(ConvertToString(width, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{datasetId}", System.Uri.EscapeDataString(ConvertToString(datasetId, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{width}", System.Uri.EscapeDataString(ConvertToString(width, System.Globalization.CultureInfo.InvariantCulture)));
             if (transparent != null)
             {
-                urlBuilder_.Append("transparent=").Append(Uri.EscapeDataString(ConvertToString(transparent, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("transparent=").Append(System.Uri.EscapeDataString(ConvertToString(transparent, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Method = new HttpMethod("GET");
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("image/png"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -2474,10 +2475,10 @@ namespace DataMosRu.Client
                             var result_ = default(object);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<object>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<object>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -2508,7 +2509,7 @@ namespace DataMosRu.Client
         /// <param name="size">Размер иконки</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<object> GetSocialImageAsync(int datasetId, int? size)
+        public System.Threading.Tasks.Task<object> GetSocialImageAsync(int datasetId, int? size)
         {
             return GetSocialImageAsync(datasetId, size, System.Threading.CancellationToken.None);
         }
@@ -2519,37 +2520,37 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<object> GetSocialImageAsync(int datasetId, int? size, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<object> GetSocialImageAsync(int datasetId, int? size, System.Threading.CancellationToken cancellationToken)
         {
             if (datasetId == null)
-                throw new ArgumentNullException("datasetId");
+                throw new System.ArgumentNullException("datasetId");
 
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/datasets/{datasetId}/SocialImage?");
-            urlBuilder_.Replace("{datasetId}", Uri.EscapeDataString(ConvertToString(datasetId, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{datasetId}", System.Uri.EscapeDataString(ConvertToString(datasetId, System.Globalization.CultureInfo.InvariantCulture)));
             if (size != null)
             {
-                urlBuilder_.Append("size=").Append(Uri.EscapeDataString(ConvertToString(size, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("size=").Append(System.Uri.EscapeDataString(ConvertToString(size, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Method = new HttpMethod("GET");
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("image/png"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -2565,10 +2566,10 @@ namespace DataMosRu.Client
                             var result_ = default(object);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<object>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<object>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -2599,7 +2600,7 @@ namespace DataMosRu.Client
         /// <param name="size">Размер иконки</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<object> GetSocialImage2Async(int datasetId, int? size)
+        public System.Threading.Tasks.Task<object> GetSocialImage2Async(int datasetId, int? size)
         {
             return GetSocialImage2Async(datasetId, size, System.Threading.CancellationToken.None);
         }
@@ -2610,37 +2611,37 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<object> GetSocialImage2Async(int datasetId, int? size, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<object> GetSocialImage2Async(int datasetId, int? size, System.Threading.CancellationToken cancellationToken)
         {
             if (datasetId == null)
-                throw new ArgumentNullException("datasetId");
+                throw new System.ArgumentNullException("datasetId");
 
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/classifiers/{datasetId}/SocialImage?");
-            urlBuilder_.Replace("{datasetId}", Uri.EscapeDataString(ConvertToString(datasetId, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{datasetId}", System.Uri.EscapeDataString(ConvertToString(datasetId, System.Globalization.CultureInfo.InvariantCulture)));
             if (size != null)
             {
-                urlBuilder_.Append("size=").Append(Uri.EscapeDataString(ConvertToString(size, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("size=").Append(System.Uri.EscapeDataString(ConvertToString(size, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Method = new HttpMethod("GET");
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("image/png"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -2656,10 +2657,10 @@ namespace DataMosRu.Client
                             var result_ = default(object);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<object>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<object>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -2687,9 +2688,9 @@ namespace DataMosRu.Client
 
         private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
         {
-            if (value is Enum)
+            if (value is System.Enum)
             {
-                string name = Enum.GetName(value.GetType(), value);
+                string name = System.Enum.GetName(value.GetType(), value);
                 if (name != null)
                 {
                     var field = System.Reflection.IntrospectionExtensions.GetTypeInfo(value.GetType()).GetDeclaredField(name);
@@ -2706,19 +2707,19 @@ namespace DataMosRu.Client
             }
             else if (value is bool)
             {
-                return Convert.ToString(value, cultureInfo).ToLowerInvariant();
+                return System.Convert.ToString(value, cultureInfo).ToLowerInvariant();
             }
             else if (value is byte[])
             {
-                return Convert.ToBase64String((byte[])value);
+                return System.Convert.ToBase64String((byte[])value);
             }
             else if (value != null && value.GetType().IsArray)
             {
-                var array = Enumerable.OfType<object>((Array)value);
-                return string.Join(",", Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
+                var array = System.Linq.Enumerable.OfType<object>((System.Array)value);
+                return string.Join(",", System.Linq.Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
             }
 
-            return Convert.ToString(value, cultureInfo);
+            return System.Convert.ToString(value, cultureInfo);
         }
     }
 }

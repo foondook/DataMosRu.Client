@@ -7,7 +7,7 @@
 </PropertyGroup>
 
 <ItemGroup>
-  <ProjectReference Include="..\DataMosRu.Model\DataMosRu.Model.csproj" />
+  <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
 </ItemGroup>
 
 </Project>

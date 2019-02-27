@@ -5,20 +5,21 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Linq;
 
-namespace DataMosRu.Client
+namespace DataMosRu.Client.Clients
 {
+    [System.CodeDom.Compiler.GeneratedCode("NSwag", "12.0.14.0 (NJsonSchema v9.13.18.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class StructureClient
     {
         private string _baseUrl = "https://apidata.mos.ru";
-        private HttpClient _httpClient;
-        private Lazy<JsonSerializerSettings> _settings;
+        private System.Net.Http.HttpClient _httpClient;
+        private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
 
-        public StructureClient(HttpClient httpClient)
+        public StructureClient(System.Net.Http.HttpClient httpClient)
         {
             _httpClient = httpClient;
-            _settings = new Lazy<JsonSerializerSettings>(() =>
+            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() =>
             {
-                var settings = new JsonSerializerSettings();
+                var settings = new Newtonsoft.Json.JsonSerializerSettings();
                 UpdateJsonSerializerSettings(settings);
                 return settings;
             });
@@ -30,12 +31,12 @@ namespace DataMosRu.Client
             set { _baseUrl = value; }
         }
 
-        protected JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
+        protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
 
-        partial void UpdateJsonSerializerSettings(JsonSerializerSettings settings);
-        partial void PrepareRequest(HttpClient client, HttpRequestMessage request, string url);
-        partial void PrepareRequest(HttpClient client, HttpRequestMessage request, StringBuilder urlBuilder);
-        partial void ProcessResponse(HttpClient client, HttpResponseMessage response);
+        partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
+        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
 
         /// <summary>Json структура версии набора данных</summary>
         /// <param name="id">Идентификатор набора данных</param>
@@ -43,7 +44,7 @@ namespace DataMosRu.Client
         /// <param name="vsDate">Дата публикации версии</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<DatasetItem> GetItemAsync(string id, int versionNumber, string vsDate)
+        public System.Threading.Tasks.Task<DatasetItem> GetItemAsync(string id, int versionNumber, string vsDate)
         {
             return GetItemAsync(id, versionNumber, vsDate, System.Threading.CancellationToken.None);
         }
@@ -55,40 +56,40 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<DatasetItem> GetItemAsync(string id, int versionNumber, string vsDate, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<DatasetItem> GetItemAsync(string id, int versionNumber, string vsDate, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
-                throw new ArgumentNullException("id");
+                throw new System.ArgumentNullException("id");
 
             if (versionNumber == null)
-                throw new ArgumentNullException("versionNumber");
+                throw new System.ArgumentNullException("versionNumber");
 
             if (vsDate == null)
-                throw new ArgumentNullException("vsDate");
+                throw new System.ArgumentNullException("vsDate");
 
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/datasets/{id}/structure-{vsDate}(vs{versionNumber}).json");
-            urlBuilder_.Replace("{id}", Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
-            urlBuilder_.Replace("{versionNumber}", Uri.EscapeDataString(ConvertToString(versionNumber, System.Globalization.CultureInfo.InvariantCulture)));
-            urlBuilder_.Replace("{vsDate}", Uri.EscapeDataString(ConvertToString(vsDate, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{versionNumber}", System.Uri.EscapeDataString(ConvertToString(versionNumber, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{vsDate}", System.Uri.EscapeDataString(ConvertToString(vsDate, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Method = new HttpMethod("GET");
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -104,10 +105,10 @@ namespace DataMosRu.Client
                             var result_ = default(DatasetItem);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<DatasetItem>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<DatasetItem>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -139,7 +140,7 @@ namespace DataMosRu.Client
         /// <param name="vsDate">Дата публикации версии</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<DatasetItem> GetItem2Async(string id, int versionNumber, string vsDate)
+        public System.Threading.Tasks.Task<DatasetItem> GetItem2Async(string id, int versionNumber, string vsDate)
         {
             return GetItem2Async(id, versionNumber, vsDate, System.Threading.CancellationToken.None);
         }
@@ -151,40 +152,40 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<DatasetItem> GetItem2Async(string id, int versionNumber, string vsDate, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<DatasetItem> GetItem2Async(string id, int versionNumber, string vsDate, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
-                throw new ArgumentNullException("id");
+                throw new System.ArgumentNullException("id");
 
             if (versionNumber == null)
-                throw new ArgumentNullException("versionNumber");
+                throw new System.ArgumentNullException("versionNumber");
 
             if (vsDate == null)
-                throw new ArgumentNullException("vsDate");
+                throw new System.ArgumentNullException("vsDate");
 
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/opendata/{id}/structure-{vsDate}(vs{versionNumber}).json");
-            urlBuilder_.Replace("{id}", Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
-            urlBuilder_.Replace("{versionNumber}", Uri.EscapeDataString(ConvertToString(versionNumber, System.Globalization.CultureInfo.InvariantCulture)));
-            urlBuilder_.Replace("{vsDate}", Uri.EscapeDataString(ConvertToString(vsDate, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{versionNumber}", System.Uri.EscapeDataString(ConvertToString(versionNumber, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{vsDate}", System.Uri.EscapeDataString(ConvertToString(vsDate, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Method = new HttpMethod("GET");
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -200,10 +201,10 @@ namespace DataMosRu.Client
                             var result_ = default(DatasetItem);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<DatasetItem>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<DatasetItem>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -233,7 +234,7 @@ namespace DataMosRu.Client
         /// <param name="id">Идентификатор набора данных</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<DatasetPassportData> GetPassportAsync(string id)
+        public System.Threading.Tasks.Task<DatasetPassportData> GetPassportAsync(string id)
         {
             return GetPassportAsync(id, System.Threading.CancellationToken.None);
         }
@@ -243,32 +244,32 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<DatasetPassportData> GetPassportAsync(string id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<DatasetPassportData> GetPassportAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
-                throw new ArgumentNullException("id");
+                throw new System.ArgumentNullException("id");
 
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/datasets/{id}/meta.json");
-            urlBuilder_.Replace("{id}", Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Method = new HttpMethod("GET");
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -284,10 +285,10 @@ namespace DataMosRu.Client
                             var result_ = default(DatasetPassportData);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<DatasetPassportData>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<DatasetPassportData>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -317,7 +318,7 @@ namespace DataMosRu.Client
         /// <param name="id">Идентификатор набора данных</param>
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
-        public Task<DatasetPassportData> GetPassport2Async(string id)
+        public System.Threading.Tasks.Task<DatasetPassportData> GetPassport2Async(string id)
         {
             return GetPassport2Async(id, System.Threading.CancellationToken.None);
         }
@@ -327,32 +328,32 @@ namespace DataMosRu.Client
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async Task<DatasetPassportData> GetPassport2Async(string id, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<DatasetPassportData> GetPassport2Async(string id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
-                throw new ArgumentNullException("id");
+                throw new System.ArgumentNullException("id");
 
-            var urlBuilder_ = new StringBuilder();
+            var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/v1/opendata/{id}/meta.json");
-            urlBuilder_.Replace("{id}", Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
+            urlBuilder_.Replace("{id}", System.Uri.EscapeDataString(ConvertToString(id, System.Globalization.CultureInfo.InvariantCulture)));
 
             var client_ = _httpClient;
             try
             {
-                using (var request_ = new HttpRequestMessage())
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Method = new HttpMethod("GET");
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new Uri(url_, UriKind.RelativeOrAbsolute);
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
-                    var response_ = await client_.SendAsync(request_, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
-                        var headers_ = Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
                         if (response_.Content != null && response_.Content.Headers != null)
                         {
                             foreach (var item_ in response_.Content.Headers)
@@ -368,10 +369,10 @@ namespace DataMosRu.Client
                             var result_ = default(DatasetPassportData);
                             try
                             {
-                                result_ = JsonConvert.DeserializeObject<DatasetPassportData>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<DatasetPassportData>(responseData_, _settings.Value);
                                 return result_;
                             }
-                            catch (Exception exception_)
+                            catch (System.Exception exception_)
                             {
                                 throw new SwaggerException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -399,9 +400,9 @@ namespace DataMosRu.Client
 
         private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
         {
-            if (value is Enum)
+            if (value is System.Enum)
             {
-                string name = Enum.GetName(value.GetType(), value);
+                string name = System.Enum.GetName(value.GetType(), value);
                 if (name != null)
                 {
                     var field = System.Reflection.IntrospectionExtensions.GetTypeInfo(value.GetType()).GetDeclaredField(name);
@@ -418,19 +419,19 @@ namespace DataMosRu.Client
             }
             else if (value is bool)
             {
-                return Convert.ToString(value, cultureInfo).ToLowerInvariant();
+                return System.Convert.ToString(value, cultureInfo).ToLowerInvariant();
             }
             else if (value is byte[])
             {
-                return Convert.ToBase64String((byte[])value);
+                return System.Convert.ToBase64String((byte[])value);
             }
             else if (value != null && value.GetType().IsArray)
             {
-                var array = Enumerable.OfType<object>((Array)value);
-                return string.Join(",", Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
+                var array = System.Linq.Enumerable.OfType<object>((System.Array)value);
+                return string.Join(",", System.Linq.Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
             }
 
-            return Convert.ToString(value, cultureInfo);
+            return System.Convert.ToString(value, cultureInfo);
         }
     }
 }
