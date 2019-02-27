@@ -55,6 +55,7 @@ namespace DataMosRu.Client.Clients
         /// <returns>OK</returns>
         /// <exception cref="SwaggerException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+
         public async System.Threading.Tasks.Task<ResultWithCount<DatasetListItem>> GetListAsync(bool? foreign, string filter, string orderby, int? top, int? skip, string inlinecount, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
@@ -148,6 +149,14 @@ namespace DataMosRu.Client.Clients
             finally
             {
             }
+        }
+        public Task<ResultWithCount<DatasetListItem>> GetListAsync(
+            bool? foreign, string filter, string orderby, int? top, int? skip, string inlinecount, 
+            System.Threading.CancellationToken cancellationToken, 
+            Expression<Func<DatasetListItem, object>> projectionExpression)
+        {
+            var projection = (projectionExpression.Body as NewExpression).Members.Select(m => m.Name);
+            return GetListPostAsync(projection, foreign, filter, orderby, top, skip, inlinecount, cancellationToken);
         }
 
         /// <summary>Получение списка наборов данных или справочников</summary>
